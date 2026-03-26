@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sen_Hee | Video Editor</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<canvas id="bgCanvas"></canvas>
+
+<div id="loader">
+  <h1 class="glitch">You just found the right editor</h1>
+</div>
+
+<header>
+  <img src="logo.png" class="logo">
+  <nav>
+    <a href="#work">Work</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section id="about">
+  <h1>Hi, I'm Sen_Hee</h1>
+  <p>I create videos that grab attention, drive results, and make your brand unforgettable.</p>
+  <div class="btn-group">
+    <a href="#contact" class="btn">Hire Me</a>
+    <a href="#work" class="btn">Showreel</a>
+    <a href="#work" class="btn">Selected Work</a>
+  </div>
+</section>
+
+<section class="showreel-highlight" id="work">
+  <iframe src="https://www.youtube.com/embed/Eno2ksB2qL0" allowfullscreen></iframe>
+  <h3>Sen_Hee Showreel</h3>
+</section>
+
+<section>
+  <h2 style="text-align:center;margin:20px 0;">Selected Work</h2>
+
+  <div class="row-3">
+    <div class="card landscape" onclick="openVideo('vPdZJNgsQCg','landscape')">
+      <img src="thumbnails/video1.jpg" class="thumb">
+      <p>Ai Story Advertisement</p>
+    </div>
+    <div class="card landscape" onclick="openVideo('oUDvO2q9EA0','landscape')">
+      <img src="thumbnails/video2.jpg" class="thumb">
+      <p>Event intro</p>
+    </div>
+    <div class="card landscape" onclick="openVideo('QjWWG3K9wfU','landscape')">
+      <img src="thumbnails/video3.jpg" class="thumb">
+      <p>Documentary</p>
+    </div>
+  </div>
+
+  <div class="row-2">
+    <div class="card portrait" onclick="openVideo('-ShbG_nhsDA','portrait')">
+      <img src="thumbnails/video4.jpg" class="thumb">
+      <p>Portrait Ad</p>
+    </div>
+    <div class="card portrait" onclick="openVideo('0iEXAXqAgjk','portrait')">
+      <img src="thumbnails/video5.jpg" class="thumb">
+      <p>Portrait Meme</p>
+    </div>
+  </div>
+</section>
+
+<div class="video-popup" id="popup">
+  <span id="closePopup">&times;</span>
+  <iframe id="popupFrame" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</div>
+
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<section class="contact" id="contact">
+  <h2>Contact Me</h2>
+  <div class="contact-buttons">
+    <a href="https://wa.me/94743902168">WhatsApp</a>
+    <a href="https://www.instagram.com/sen_hee/">Instagram</a>
+    <a href="mailto:k.senuthhelika2008@gmail.com">Email</a>
+  </div>
+</section>
+
+<script src="portfolio.js" defer></script>
+
+</body>
+</html>

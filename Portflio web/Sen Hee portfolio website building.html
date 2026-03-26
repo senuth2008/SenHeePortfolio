@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sen_Hee | Video Editor</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+/* RESET & BODY */
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Poppins',sans-serif;background:#0A192F;color:#fff;overflow-x:hidden;position:relative}
+
+/* PARTICLES */
+#particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.particle{position:absolute;width:2px;height:2px;background:rgba(255,255,255,0.08);border-radius:50%;animation:move 25s linear infinite}
+@keyframes move{0%{transform:translateY(0) translateX(0);}100%{transform:translateY(-1200px) translateX(800px);}}
+
+/* LOADER */
+#loader{position:fixed;top:0;left:0;width:100%;height:100%;display:flex;justify-content:center;align-items:center;background:#0A192F;z-index:3000}
+.glitch{font-size:3rem;font-weight:700;color:#00CFFF;text-transform:uppercase;animation:glitchAnim 2s ease-in-out forwards, zoomIn 2s ease forwards;text-align:center}
+@keyframes glitchAnim{0%{opacity:0; transform:translate(0,0) skew(0deg);}10%{opacity:1; transform:translate(-3px,0) skew(-2deg);}20%{transform:translate(3px,0) skew(2deg);}30%{transform:translate(-2px,0) skew(-1deg);}40%{transform:translate(2px,0) skew(1deg);}50%{transform:translate(0,0) skew(0deg);}100%{opacity:1; transform:translate(0,0);}}
+@keyframes zoomIn{0%{transform:scale(0.5);}100%{transform:scale(1);}}
+
+/* HEADER */
+header{position:fixed;width:100%;display:flex;justify-content:space-between;padding:10px 3%;background:rgba(10,25,47,0.7);backdrop-filter:blur(10px);z-index:1000}
+.logo{height:35px}
+nav a{margin-left:15px;color:#fff;text-decoration:none;opacity:0.7;font-weight:500}
+nav a:hover{opacity:1}
+
+/* HERO */
+.hero{height:50vh;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:15px;padding:0 3%}
+.hero h1{font-size:2.5rem;text-align:center;animation:fadeUp 1s ease forwards}
+.hero .btn{margin-top:5px}
+
+/* ABOUT ME */
+#about{padding:50px 3%;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px}
+#about h1{font-size:2.2rem}
+#about p{max-width:700px;opacity:0.8}
+.btn-group{display:flex;gap:10px;margin-top:10px}
+
+/* SHOWREEL HIGHLIGHT */
+.showreel-highlight{margin:30px auto;padding:10px;border-radius:30px;background:rgba(0,207,255,0.05);max-width:1200px;text-align:center;box-shadow:0 0 25px rgba(0,207,255,0.3)}
+.showreel-highlight iframe{width:100%;max-width:1000px;height:500px;border-radius:20px;aspect-ratio:16/9;transition:0.4s}
+.showreel-highlight iframe:hover{transform:scale(1.02);box-shadow:0 0 35px #00CFFF}
+.showreel-highlight h3{margin-top:10px;color:#00CFFF;font-size:1.4rem;font-weight:600;letter-spacing:1px}
+
+/* SELECTED WORK */
+.row-3,.row-2{display:grid;gap:12px;margin:25px auto;max-width:1200px;justify-items:center}
+.row-3{grid-template-columns:repeat(3,1fr)}
+.row-2{grid-template-columns:repeat(2,1fr)}
+.card{position:relative;border-radius:15px;overflow:hidden;background:rgba(255,255,255,0.05);cursor:pointer;transition:0.4s}
+.card:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 0 25px #00CFFF}
+.thumb{width:100%;height:100%;object-fit:cover}
+.card p{position:absolute;bottom:6px;left:6px;background:rgba(0,0,0,0.5);padding:4px 8px;border-radius:5px;font-size:0.8rem}
+.landscape{aspect-ratio:16/9}.portrait{aspect-ratio:16/9;max-height:320px} /* reduced portrait size to match visual weight */
+
+/* POPUP */
+.video-popup{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);backdrop-filter:blur(15px);display:flex;justify-content:center;align-items:center;opacity:0;pointer-events:none;transition:0.3s;z-index:2000}
+.video-popup.active{opacity:1;pointer-events:all}
+.video-popup iframe{width:80%;max-width:1000px;aspect-ratio:16/9;border:none;border-radius:15px;transition:0.4s}
+#closePopup{position:absolute;top:30px;right:40px;font-size:2rem;cursor:pointer;color:#00CFFF;transition:0.3s}
+#closePopup:hover{transform:rotate(90deg)}
+
+/* CONTACT */
+.contact{display:flex;justify-content:center;gap:15px;margin:50px 0}
+.contact .btn{padding:12px 20px;font-weight:600}
+
+/* CURSOR */
+.cursor-glow{position:fixed;width:180px;height:180px;background:radial-gradient(circle, rgba(0,207,255,0.15), transparent 70%);pointer-events:none;transform:translate(-50%,-50%);transition:0.2s;mix-blend-mode:screen}
+
+/* ANIMATIONS */
+@keyframes fadeUp{0%{opacity:0;transform:translateY(15px)}100%{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+
+<!-- PARTICLES -->
+<div id="particles"></div>
+
+<!-- LOADER -->
+<div id="loader">
+  <h1 class="glitch">You just found the right editor</h1>
+</div>
+
+<header>
+  <img src="logo.png" class="logo">
+  <nav>
+    <a href="#work">Work</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<!-- ABOUT ME -->
+<section id="about">
+  <h1>Hey, I'm Sen_Hee – I craft videos that captivate and convert.</h1>
+  <p>From social campaigns to cinematic vlogs, I make your story stand out visually and emotionally.</p>
+  <div class="btn-group">
+    <a href="#work" class="btn">Showreel</a>
+    <a href="#contact" class="btn">Contact Me</a>
+  </div>
+</section>
+
+<!-- SHOWREEL -->
+<section class="showreel-highlight">
+  <iframe src="https://www.youtube.com/embed/Eno2ksB2qL0" allowfullscreen></iframe>
+  <h3>Sen_Hee Showreel</h3>
+</section>
+
+<!-- SELECTED WORK -->
+<section>
+  <div class="row-3">
+    <div class="card landscape" onclick="openVideo('vPdZJNgsQCg')">
+      <img src="https://img.youtube.com/vi/vPdZJNgsQCg/hqdefault.jpg" class="thumb">
+      <p>Corporate Ad</p>
+    </div>
+    <div class="card landscape" onclick="openVideo('oUDvO2q9EA0')">
+      <img src="https://img.youtube.com/vi/oUDvO2q9EA0/hqdefault.jpg" class="thumb">
+      <p>Social Campaign</p>
+    </div>
+    <div class="card landscape" onclick="openVideo('QjWWG3K9wfU')">
+      <img src="https://img.youtube.com/vi/QjWWG3K9wfU/hqdefault.jpg" class="thumb">
+      <p>Brand Promo</p>
+    </div>
+  </div>
+  <div class="row-2">
+    <div class="card portrait" onclick="openVideo('-ShbG_nhsDA')">
+      <img src="https://img.youtube.com/vi/-ShbG_nhsDA/hqdefault.jpg" class="thumb">
+      <p>Vlog Highlight</p>
+    </div>
+    <div class="card portrait" onclick="openVideo('0iEXAXqAgjk')">
+      <img src="https://img.youtube.com/vi/0iEXAXqAgjk/hqdefault.jpg" class="thumb">
+      <p>Product Reel</p>
+    </div>
+  </div>
+</section>
+
+<!-- POPUP -->
+<div class="video-popup" id="popup">
+  <span id="closePopup">&times;</span>
+  <iframe id="popupFrame" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</div>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+  <a href="https://wa.me/94743902168" class="btn">WhatsApp</a>
+  <a href="https://www.instagram.com/sen_hee/" class="btn">Instagram</a>
+  <a href="mailto:k.senuthhelika2008@gmail.com" class="btn">Email</a>
+</section>
+
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<script>
+// ===== PARTICLES =====
+const particlesContainer=document.getElementById('particles');
+for(let i=0;i<150;i++){
+  let p=document.createElement('div');
+  p.classList.add('particle');
+  p.style.top=Math.random()*window.innerHeight+'px';
+  p.style.left=Math.random()*window.innerWidth+'px';
+  p.style.width=Math.random()*3+'px';
+  p.style.height=Math.random()*3+'px';
+  particlesContainer.appendChild(p);
+}
+
+// ===== LOADER =====
+window.addEventListener('load', ()=>{
+  setTimeout(()=>{
+    document.getElementById('loader').style.display='none';
+  },2000);
+});
+
+// ===== POPUP =====
+const popup=document.getElementById('popup');
+const frame=document.getElementById('popupFrame');
+const closeBtn=document.getElementById('closePopup');
+function openVideo(id){
+  popup.classList.add('active');
+  frame.src="https://www.youtube.com/embed/"+id+"?autoplay=1&mute=1";
+}
+closeBtn.onclick=()=>{
+  popup.classList.remove('active');
+  frame.src="";
+}
+popup.onclick=(e)=>{
+  if(e.target===popup){
+    popup.classList.remove('active');
+    frame.src="";
+  }
+}
+
+// ===== CURSOR =====
+const glow=document.getElementById('cursorGlow');
+window.addEventListener('mousemove',e=>{
+  glow.style.left=e.clientX+'px';
+  glow.style.top=e.clientY+'px';
+});
+</script>
+</body>
+</html>
